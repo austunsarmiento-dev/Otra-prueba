@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#5c2030">
+<title>Nuestras Fotos ❤️📸</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Arial,sans-serif;background:#080808;color:#fff}
+
+.header{
+  position:sticky;top:0;z-index:10;
+  padding:20px;background:linear-gradient(180deg,rgba(8,8,8,0.95),transparent);
+  display:flex;align-items:center;justify-content:space-between
+}
+.back-btn{
+  padding:10px 20px;border-radius:999px;border:none;
+  background:rgba(255,80,120,0.2);color:#ff9ebb;
+  font-size:15px;cursor:pointer;transition:all 0.2s ease
+}
+.back-btn:hover{background:rgba(255,80,120,0.35)}
+.title{
+  font-size:22px;background:linear-gradient(90deg,#ff7e9f,#ffb3c1);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  font-weight:700
+}
+
+.gallery{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:12px;padding:16px;padding-bottom:40px
+}
+.photo{
+  width:100%;aspect-ratio:1;object-fit:cover;
+  border-radius:16px;cursor:pointer;
+  transition:transform 0.3s ease,box-shadow 0.3s ease
+}
+.photo:hover{
+  transform:scale(1.03);
+  box-shadow:0 10px 30px rgba(255,80,120,0.25)
+}
+
+.lightbox{
+  position:fixed;inset:0;background:rgba(0,0,0,0.95);
+  z-index:100;display:none;align-items:center;justify-content:center;
+  padding:20px
+}
+.lightbox.active{display:flex}
+.lightbox-img{
+  max-width:100%;max-height:85vh;
+  border-radius:16px;object-fit:contain
+}
+.close-btn{
+  position:absolute;top:20px;right:20px;
+  width:50px;height:50px;border-radius:50%;border:none;
+  background:rgba(255,255,255,0.1);color:#fff;
+  font-size:24px;cursor:pointer
+}
+.photo-count{
+  text-align:center;color:#ff9ebb;margin-top:10px;font-size:15px
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <button class="back-btn" onclick="window.location.href='index.html'">← Volver 🎶</button>
+  <h1 class="title">Nuestras Fotos 📸❤️</h1>
+  <div style="width:80px"></div>
+</div>
+
+<div class="gallery" id="gallery">
+  <img src="assets/foto1.jpg" class="photo" alt="Nuestra foto" onclick="openLightbox(0)">
+  <img src="assets/foto2.jpg" class="photo" alt="Nuestra foto" onclick="openLightbox(1)">
+  <img src="assets/foto3.jpg" class="photo" alt="Nuestra foto" onclick="openLightbox(2)">
+  <img src="assets/foto4.jpg" class="photo" alt="Nuestra foto" onclick="openLightbox(3)">
+  <img src="assets/foto5.jpg" class="photo" alt="Nuestra foto" onclick="openLightbox(4)">
+  <img src="assets/foto6.jpg" class="photo" alt="Nuestra foto" onclick="openLightbox(5)">
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="close-btn">✕</button>
+  <div>
+    <img src="" class="lightbox-img" id="lightbox-img" alt="">
+    <p class="photo-count" id="photoCount"></p>
+  </div>
+</div>
+
+<script>
+const photos = [
+  "assets/foto1.jpg",
+  "assets/foto2.jpg",
+  "assets/foto3.jpg",
+  "assets/foto4.jpg",
+  "assets/foto5.jpg",
+  "assets/foto6.jpg"
+];
+let currentIndex = 0;
+
+function openLightbox(index){
+  currentIndex = index;
+  document.getElementById("lightbox-img").src = photos[index];
+  document.getElementById("photoCount").textContent = `${index + 1} / ${photos.length} ❤️`;
+  document.getElementById("lightbox").classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeLightbox(){
+  document.getElementById("lightbox").classList.remove("active");
+  document.body.style.overflow = "";
+}
+</script>
+
+</body>
+</html>
